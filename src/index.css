@@ -1,0 +1,385 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Poppins Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Light theme colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+}
+
+[data-theme="dark"] {
+  /* Dark theme colors */
+  --bg-primary: #0A0F1C;
+  --bg-secondary: #1A1F2E;
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Enhanced Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Theme Transitions */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Enhanced Focus Styles for Accessibility */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid #FF6B2B;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(255, 107, 43, 0.2);
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .service-card,
+  .benefit-card {
+    border: 2px solid currentColor !important;
+    background: var(--bg-primary) !important;
+  }
+}
+
+/* Enhanced Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  html {
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-pulse,
+  .animate-bounce,
+  .animate-spin,
+  .animate-scroll {
+    animation: none !important;
+  }
+}
+
+/* Enhanced Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #FF6B2B, #FF8A4A);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FF8A4A, #FFB366);
+}
+
+/* Enhanced Selection Styles */
+::selection {
+  background: linear-gradient(45deg, #FF6B2B, #FF8A4A);
+  color: white;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background: #FF6B2B;
+  color: white;
+  text-shadow: none;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(2deg); }
+}
+
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(-2deg); }
+}
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrolling Logo Animation */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 8s ease-in-out infinite 2s;
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 3s ease infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.hero-content,
+.service-card,
+.benefit-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-content.animate-in,
+.service-card.animate-in,
+.benefit-card.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Performance Optimizations */
+.service-card,
+.benefit-card {
+  contain: layout style paint;
+}
+
+.service-card:hover,
+.benefit-card:hover {
+  will-change: transform;
+}
+
+/* Enhanced glass morphism effects */
+.glass-effect {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Enhanced hover states */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+/* Loading States */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+  cursor: wait;
+}
+
+/* Enhanced Image Optimization */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Enhanced Form Styles */
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #FF6B2B;
+  box-shadow: 0 0 0 3px rgba(255, 107, 43, 0.1);
+}
+
+/* Enhanced Button Hover Effects */
+button {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+button:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+/* Enhanced Mobile Optimizations */
+@media (max-width: 768px) {
+  .service-card,
+  .benefit-card {
+    padding: 1.5rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+    line-height: 1.3;
+  }
+  
+  /* Improve touch targets */
+  button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .service-card,
+  .benefit-card {
+    border: 1px solid #000 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Dark mode utilities */
+.dark {
+  color-scheme: dark;
+}
+
+/* Light mode specific styles */
+.light {
+  color-scheme: light;
+}
+
+/* Enhanced backdrop blur support */
+@supports (backdrop-filter: blur(20px)) {
+  .backdrop-blur-sm {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+
+@supports not (backdrop-filter: blur(20px)) {
+  .backdrop-blur-sm {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+/* Framer Motion optimizations */
+.motion-reduce {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Enhanced gradient animations */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Enhanced text effects */
+.text-glow {
+  text-shadow: 0 0 20px rgba(255, 107, 43, 0.5);
+}
+
+.text-glow:hover {
+  text-shadow: 0 0 30px rgba(255, 107, 43, 0.8);
+}
+
+/* Improved focus indicators for better accessibility */
+.focus-visible:focus {
+  outline: 2px solid #FF6B2B;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(255, 107, 43, 0.2);
+}
+
+/* Better contrast for light mode */
+.light .text-gray-600 {
+  color: #4b5563;
+}
+
+.light .text-gray-700 {
+  color: #374151;
+}
+
+.light .text-gray-900 {
+  color: #111827;
+}
+
+/* Ensure proper contrast in dark mode */
+.dark .text-gray-300 {
+  color: #d1d5db;
+}
+
+.dark .text-gray-400 {
+  color: #9ca3af;
+}
+
+.dark .text-white {
+  color: #ffffff;
+}
