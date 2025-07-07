@@ -51,14 +51,14 @@ const Hero: React.FC = () => {
   ];
 
   return (
-    <section id="home" ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 to-white dark:from-[#0A0F1C] dark:to-[#1A1F2E] pt-20">
+    <section id="home" ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 to-white dark:from-[#0A0F1C] dark:to-[#1A1F2E] pt-24">
       {/* Background Elements */}
       <div className="absolute inset-0">
         {/* Animated gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-orange-50/50 dark:from-[#0A0F1C] dark:via-[#1A1F2E] dark:to-[#0A0F1C]"></div>
         
         {/* Floating orbs */}
-        <div className="absolute top-1/4 left-10 w-32 h-32 bg-gradient-to-r from-[#FF6B2B]/30 to-[#FF8A4A]/30 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute top-1/4 left-10 w-32 h-32 bg-gradient-to-r from-orange-500/30 to-orange-600/30 rounded-full blur-3xl animate-float"></div>
         <div className="absolute bottom-1/4 right-20 w-24 h-24 bg-gradient-to-r from-blue-500/30 to-cyan-500/30 rounded-full blur-2xl animate-float-delayed"></div>
         <div className="absolute top-1/2 right-10 w-20 h-20 bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-full blur-2xl animate-float"></div>
         
@@ -77,14 +77,14 @@ const Hero: React.FC = () => {
         <div className="text-center mb-16">
           {/* Badge */}
           <motion.div 
-            className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#FF6B2B]/20 to-purple-500/20 border border-[#FF6B2B]/30 rounded-full text-[#FF6B2B] text-sm font-medium mb-8 backdrop-blur-sm"
+            className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-500/20 to-purple-500/20 border border-orange-500/30 rounded-full text-orange-500 text-sm font-medium mb-8 backdrop-blur-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
             Pacific Softwares - Your Website Partner
-            <div className="w-2 h-2 bg-[#FF6B2B] rounded-full ml-2 animate-ping"></div>
+            <div className="w-2 h-2 bg-orange-500 rounded-full ml-2 animate-ping"></div>
           </motion.div>
           
           {/* Main Headline */}
@@ -96,7 +96,7 @@ const Hero: React.FC = () => {
           >
             We Don't Just Build Websites
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B2B] via-[#FF8A4A] to-[#FFB366] animate-gradient-x">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 animate-gradient-x">
               We Build Market Leaders.
             </span>
           </motion.h1>
@@ -123,9 +123,9 @@ const Hero: React.FC = () => {
               href="https://cal.com/khushal-sharma-txi5n5"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105 relative overflow-hidden"
+              className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105 relative overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <Calendar className="mr-2 w-5 h-5 relative z-10" />
               <span className="relative z-10">Book a 15 min call</span>
               <ArrowRight className="ml-2 w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
@@ -170,14 +170,14 @@ const Hero: React.FC = () => {
 
           {/* Rotating Services Display with margin bottom */}
           <motion.div 
-            className="text-center mb-20"
+            className="text-center mb-24"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 1.2 }}
           >
             <div className="inline-flex items-center space-x-3 px-6 py-3 bg-white/50 dark:bg-white/10 backdrop-blur-sm rounded-full border border-gray-200 dark:border-white/10">
               <span className="text-gray-600 dark:text-gray-400 text-sm">Specializing in:</span>
-              <div className="text-lg font-semibold text-[#FF6B2B] h-6 overflow-hidden">
+              <div className="text-lg font-semibold text-orange-500 h-6 overflow-hidden">
                 <motion.div 
                   className="transition-transform duration-500 ease-in-out"
                   style={{ transform: `translateY(-${currentServiceIndex * 24}px)` }}
@@ -201,7 +201,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.6, delay: 1.4 }}
         >
           <div className="w-6 h-10 border-2 border-gray-400 dark:border-white/30 rounded-full flex justify-center relative animate-bounce">
-            <div className="w-1 h-3 bg-gradient-to-b from-[#FF6B2B] to-transparent rounded-full mt-2 animate-pulse"></div>
+            <div className="w-1 h-3 bg-gradient-to-b from-orange-500 to-transparent rounded-full mt-2 animate-pulse"></div>
           </div>
           <div className="text-gray-500 dark:text-white/50 text-xs mt-2 text-center">Scroll</div>
         </motion.div>

@@ -11,7 +11,7 @@ interface NavItem {
   href: string;
 }
 
-const navItems: NavItem[] = [
+const NAVIGATION_ITEMS: NavItem[] = [
   { name: 'Portfolio', href: '#portfolio' },
   { name: 'Services', href: '#services' },
   { name: 'Process', href: '#process' },
@@ -19,135 +19,202 @@ const navItems: NavItem[] = [
   { name: 'Contact', href: '#contact' }
 ];
 
+const WHATSAPP_CONFIG = {
+  phoneNumber: '919549020892',
+  message: 'Hi! I\'m interested in your web development services. Can we discuss my project?'
+};
+
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme } = useTheme();
 
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    const handleHashChange = () => {
+      setIsMobileMenuOpen(false);
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
+
   const openWhatsApp = () => {
-    const phoneNumber = '919549020892';
-    const message = encodeURIComponent('Hi! I\'m interested in your web development services. Can we discuss my project?');
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
-    window.open(whatsappUrl, '_blank');
+    const { phoneNumber, message } = WHATSAPP_CONFIG;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
-  const headerVariants = {
-    initial: { y: -100, opacity: 0 },
-    animate: { y: 0, opacity: 1 },
-    scrolled: {
-      backdropFilter: 'blur(20px)',
-      backgroundColor:
-        theme === 'dark' ? 'rgba(10, 15, 28, 0.95)' : 'rgba(255, 255, 255, 0.95)',
-      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-    },
+  const handleNavClick = (href: string) => {
+    setIsMobileMenuOpen(false);
+    
+    // Smooth scroll to section
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
-  const mobileMenuVariants = {
-    closed: { opacity: 0, height: 0 },
-    open: { opacity: 1, height: 'auto' },
-  };
+  const headerClasses = `
+    fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out
+    ${isScrolled 
+      ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-200/50 dark:border-gray-700/50' 
+      : 'bg-transparent'
+    }
+  `;
+
+  const containerClasses = `
+    mx-auto max-w-7xl px-4 sm:px-6 lg:px-8
+    ${isScrolled ? 'py-3' : 'py-4'}
+    transition-all duration-300 ease-in-out
+  `;
+
+  const logoClasses = `
+    flex items-center space-x-3 group cursor-pointer
+    ${isScrolled ? 'scale-95' : 'scale-100'}
+    transition-transform duration-300 ease-in-out
+  `;
+
+  const logoTextClasses = `
+    font-bold transition-all duration-300 ease-in-out
+    ${isScrolled ? 'text-xl' : 'text-2xl'}
+    text-gray-900 dark:text-white
+  `;
+
+  const navLinkClasses = `
+    relative font-medium transition-all duration-200 ease-in-out
+    text-gray-700 dark:text-gray-200
+    hover:text-orange-500 dark:hover:text-orange-400
+    after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0
+    after:bg-orange-500 after:transition-all after:duration-300
+    hover:after:w-full
+  `;
+
+  const chatButtonClasses = `
+    inline-flex items-center space-x-2 rounded-full font-medium transition-all duration-200 ease-in-out
+    bg-gradient-to-r from-orange-500 to-orange-600 text-white
+    hover:from-orange-600 hover:to-orange-700 hover:shadow-lg hover:shadow-orange-500/25
+    active:scale-95 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2
+    ${isScrolled ? 'px-4 py-2 text-sm' : 'px-6 py-2.5 text-base'}
+  `;
+
+  const mobileMenuButtonClasses = `
+    rounded-lg p-2 transition-colors duration-200 ease-in-out
+    text-gray-700 dark:text-gray-200
+    hover:bg-gray-100 dark:hover:bg-gray-800
+    focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2
+  `;
 
   return (
     <motion.header
-      className="fixed left-0 right-0 top-0 z-50 transition-all duration-300"
-      variants={headerVariants}
-      initial="initial"
-      animate={isScrolled ? 'scrolled' : 'animate'}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
-      style={{
-        backdropFilter: isScrolled ? 'blur(20px)' : 'none',
-        backgroundColor: isScrolled
-          ? theme === 'dark'
-            ? 'rgba(10, 15, 28, 0.95)'
-            : 'rgba(255, 255, 255, 0.95)'
-          : 'transparent',
-        boxShadow: isScrolled ? '0 8px 32px rgba(0, 0, 0, 0.1)' : 'none',
-      }}
+      className={headerClasses}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
     >
-      {/* Centered Container with max-width and equal spacing */}
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <div className={`flex items-center justify-between transition-all duration-500 ${
-          isScrolled ? 'h-16' : 'h-20'
-        }`}>
+      <div className={containerClasses}>
+        <div className="flex items-center justify-between">
           
-          {/* Logo - Left Side */}
+          {/* Logo Section */}
           <motion.div
-            className="flex items-center space-x-3"
+            className={logoClasses}
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400, damping: 10 }}
           >
-            <a href="#home" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-[#FF6B2B] to-[#FF8A4A] rounded-lg flex items-center justify-center shadow-lg">
-                <Code className="w-6 h-6 text-white" />
+            <a 
+              href="#home" 
+              className="flex items-center space-x-3"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('#home');
+              }}
+            >
+              <div className="relative">
+                <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                  <Code className="w-6 h-6 text-white" />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-500 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               </div>
-              <div className={`transition-all duration-500 ${
-                isScrolled 
-                  ? 'text-xl font-bold' 
-                  : 'text-2xl font-bold'
-              } ${
-                theme === 'dark' ? 'text-white' : 'text-gray-900'
-              }`}>
+              <div className={logoTextClasses}>
                 {isScrolled ? (
-                  <span className="bg-gradient-to-r from-[#FF6B2B] to-[#FF8A4A] bg-clip-text text-transparent">PS</span>
+                  <span className="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
+                    PS
+                  </span>
                 ) : (
                   <>
-                    Pacific<span className="text-[#FF6B2B]">Softwares</span>
+                    Pacific<span className="text-orange-500">Softwares</span>
                   </>
                 )}
               </div>
             </a>
           </motion.div>
 
-          {/* Navigation - Center */}
-          <nav className="hidden items-center space-x-8 lg:flex">
-            {navItems.map((item) => (
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-8">
+            {NAVIGATION_ITEMS.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className={`font-medium transition-colors duration-200 hover:text-[#FF6B2B] ${
-                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                }`}
+                className={navLinkClasses}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(item.href);
+                }}
               >
                 {item.name}
               </a>
             ))}
           </nav>
 
-          {/* Right Side - Theme Toggle & Chat Button */}
-          <div className="hidden items-center space-x-4 lg:flex">
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center space-x-4">
             <ThemeToggle />
             <motion.button
               onClick={openWhatsApp}
-              className={`inline-flex items-center space-x-2 rounded-full bg-gradient-to-r from-[#FF6B2B] to-[#FF8A4A] px-6 py-2.5 font-medium text-white transition-all duration-200 hover:shadow-lg hover:shadow-[#FF6B2B]/25 hover:scale-105 ${
-                isScrolled ? 'text-sm' : 'text-base'
-              }`}
+              className={chatButtonClasses}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              aria-label="Chat on WhatsApp"
             >
-              <MessageCircle className={`${isScrolled ? 'h-4 w-4' : 'h-5 w-5'}`} />
+              <MessageCircle className={isScrolled ? 'h-4 w-4' : 'h-5 w-5'} />
               <span>Chat Now</span>
             </motion.button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Actions */}
           <div className="lg:hidden flex items-center space-x-3">
             <ThemeToggle />
             <motion.button
-              className={`rounded-lg p-2 transition-colors duration-200 ${
-                theme === 'dark' 
-                  ? 'text-white hover:bg-gray-800' 
-                  : 'text-gray-900 hover:bg-gray-100'
-              }`}
+              className={mobileMenuButtonClasses}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               whileTap={{ scale: 0.95 }}
+              aria-label="Toggle mobile menu"
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -162,28 +229,22 @@ export default function Header() {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              className="overflow-hidden lg:hidden"
-              variants={mobileMenuVariants}
-              initial="closed"
-              animate="open"
-              exit="closed"
+              className="lg:hidden overflow-hidden"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
             >
-              <div className={`mt-4 space-y-2 rounded-xl border py-4 shadow-xl backdrop-blur-lg ${
-                theme === 'dark' 
-                  ? 'border-white/20 bg-gray-900/95' 
-                  : 'border-gray-200 bg-white/95'
-              }`}>
-                {navItems.map((item) => (
+              <div className="mt-4 py-4 space-y-2 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50 rounded-xl shadow-lg">
+                {NAVIGATION_ITEMS.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
-                    className={`block px-4 py-3 font-medium transition-colors duration-200 ${
-                      theme === 'dark' 
-                        ? 'text-white hover:bg-gray-800' 
-                        : 'text-gray-900 hover:bg-gray-100'
-                    }`}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block px-4 py-3 font-medium transition-colors duration-200 text-gray-700 dark:text-gray-200 hover:text-orange-500 dark:hover:text-orange-400 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(item.href);
+                    }}
                   >
                     {item.name}
                   </a>
@@ -194,7 +255,7 @@ export default function Header() {
                       openWhatsApp();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="flex items-center justify-center w-full rounded-lg bg-gradient-to-r from-[#FF6B2B] to-[#FF8A4A] py-2.5 text-center font-medium text-white transition-all duration-200 hover:shadow-lg hover:shadow-[#FF6B2B]/25 space-x-2"
+                    className="flex items-center justify-center w-full rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 py-2.5 text-center font-medium text-white transition-all duration-200 hover:from-orange-600 hover:to-orange-700 hover:shadow-lg hover:shadow-orange-500/25 space-x-2"
                   >
                     <MessageCircle className="w-4 h-4" />
                     <span>Chat Now</span>

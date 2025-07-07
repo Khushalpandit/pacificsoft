@@ -5,27 +5,37 @@
 /* Import Poppins Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
+/* CSS Custom Properties for Theme Colors */
+:root {
+  /* Light theme colors */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-text-primary: #1f2937;
+  --color-text-secondary: #6b7280;
+  --color-border: #e5e7eb;
+  --color-accent: #f97316;
+  --color-accent-hover: #ea580c;
+}
+
+[data-theme="dark"] {
+  /* Dark theme colors */
+  --color-bg-primary: #0A0F1C;
+  --color-bg-secondary: #1A1F2E;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #d1d5db;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-accent: #fb923c;
+  --color-accent-hover: #f97316;
+}
+
 /* Base Styles */
 * {
   box-sizing: border-box;
 }
 
-:root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --text-primary: #1f2937;
-  --text-secondary: #6b7280;
-  --border-color: #e5e7eb;
-}
-
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #0A0F1C;
-  --bg-secondary: #1A1F2E;
-  --text-primary: #ffffff;
-  --text-secondary: #d1d5db;
-  --border-color: rgba(255, 255, 255, 0.1);
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Account for fixed header */
 }
 
 body {
@@ -38,27 +48,29 @@ body {
   padding: 0;
   line-height: 1.6;
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Enhanced Smooth Scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Theme Transitions */
-* {
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+/* Enhanced Theme Transitions */
+*,
+*::before,
+*::after {
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Enhanced Focus Styles for Accessibility */
-button:focus,
-a:focus,
-input:focus,
-textarea:focus {
-  outline: 2px solid #FF6B2B;
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #f97316;
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(255, 107, 43, 0.2);
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.2);
 }
 
 /* High Contrast Mode Support */
@@ -66,7 +78,12 @@ textarea:focus {
   .service-card,
   .benefit-card {
     border: 2px solid currentColor !important;
-    background: var(--bg-primary) !important;
+    background: var(--color-bg-primary) !important;
+  }
+  
+  button,
+  a {
+    border: 1px solid currentColor;
   }
 }
 
@@ -88,7 +105,10 @@ textarea:focus {
   .animate-pulse,
   .animate-bounce,
   .animate-spin,
-  .animate-scroll {
+  .animate-scroll,
+  .animate-float,
+  .animate-float-delayed,
+  .animate-gradient-x {
     animation: none !important;
   }
 }
@@ -96,50 +116,67 @@ textarea:focus {
 /* Enhanced Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+  background: var(--color-bg-secondary);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #FF6B2B, #FF8A4A);
+  background: linear-gradient(180deg, #f97316, #ea580c);
   border-radius: 4px;
   transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #FF8A4A, #FFB366);
+  background: linear-gradient(180deg, #ea580c, #c2410c);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--color-bg-secondary);
 }
 
 /* Enhanced Selection Styles */
 ::selection {
-  background: linear-gradient(45deg, #FF6B2B, #FF8A4A);
+  background: linear-gradient(45deg, #f97316, #ea580c);
   color: white;
   text-shadow: none;
 }
 
 ::-moz-selection {
-  background: #FF6B2B;
+  background: #f97316;
   color: white;
   text-shadow: none;
 }
 
-/* Animations */
+/* Performance Optimized Animations */
 @keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(2deg); }
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-20px) rotate(2deg); 
+  }
 }
 
 @keyframes float-delayed {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-15px) rotate(-2deg); }
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-15px) rotate(-2deg); 
+  }
 }
 
 @keyframes gradient-x {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%, 100% { 
+    background-position: 0% 50%; 
+  }
+  50% { 
+    background-position: 100% 50%; 
+  }
 }
 
 @keyframes fade-in-up {
@@ -153,12 +190,16 @@ textarea:focus {
   }
 }
 
-/* Scrolling Logo Animation */
 @keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% { 
+    transform: translateX(0); 
+  }
+  100% { 
+    transform: translateX(-50%); 
+  }
 }
 
+/* Animation Classes */
 .animate-scroll {
   animation: scroll 20s linear infinite;
 }
@@ -181,6 +222,7 @@ textarea:focus {
   opacity: 0;
 }
 
+/* Component Animation States */
 .hero-content,
 .service-card,
 .benefit-card {
@@ -200,26 +242,42 @@ textarea:focus {
 .service-card,
 .benefit-card {
   contain: layout style paint;
+  will-change: transform;
 }
 
 .service-card:hover,
 .benefit-card:hover {
-  will-change: transform;
+  transform: translateY(-5px) scale(1.02);
 }
 
-/* Enhanced glass morphism effects */
+/* Enhanced Glass Morphism Effects */
 .glass-effect {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Enhanced hover states */
+.dark .glass-effect {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced Hover States */
 .hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hover-lift:hover {
   transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.dark .hover-lift:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 
+              0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 /* Loading States */
@@ -229,33 +287,47 @@ textarea:focus {
   cursor: wait;
 }
 
+.loading * {
+  pointer-events: none;
+}
+
 /* Enhanced Image Optimization */
 img {
   max-width: 100%;
   height: auto;
   display: block;
+  loading: lazy;
 }
 
 /* Enhanced Form Styles */
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
   outline: none;
-  border-color: #FF6B2B;
-  box-shadow: 0 0 0 3px rgba(255, 107, 43, 0.1);
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
 }
 
-/* Enhanced Button Hover Effects */
+input:invalid,
+textarea:invalid {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Enhanced Button Styles */
 button {
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  user-select: none;
 }
 
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none !important;
+  pointer-events: none;
 }
 
 button:not(:disabled):active {
@@ -264,6 +336,10 @@ button:not(:disabled):active {
 
 /* Enhanced Mobile Optimizations */
 @media (max-width: 768px) {
+  html {
+    scroll-padding-top: 70px;
+  }
+  
   .service-card,
   .benefit-card {
     padding: 1.5rem;
@@ -285,6 +361,12 @@ button:not(:disabled):active {
     min-height: 44px;
     min-width: 44px;
   }
+  
+  /* Optimize animations for mobile */
+  .animate-float,
+  .animate-float-delayed {
+    animation-duration: 4s;
+  }
 }
 
 /* Print Styles */
@@ -295,70 +377,57 @@ button:not(:disabled):active {
     background: transparent !important;
     box-shadow: none !important;
   }
+  
+  .animate-float,
+  .animate-float-delayed,
+  .animate-scroll,
+  .animate-gradient-x {
+    animation: none !important;
+  }
 }
 
-/* Dark mode utilities */
+/* Dark Mode Utilities */
 .dark {
   color-scheme: dark;
 }
 
-/* Light mode specific styles */
 .light {
   color-scheme: light;
 }
 
-/* Enhanced backdrop blur support */
+/* Enhanced Backdrop Blur Support */
 @supports (backdrop-filter: blur(20px)) {
   .backdrop-blur-sm {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
   }
+  
+  .backdrop-blur-md {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
 }
 
 @supports not (backdrop-filter: blur(20px)) {
   .backdrop-blur-sm {
-    background: rgba(255, 255, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+  }
+  
+  .dark .backdrop-blur-sm {
+    background: rgba(0, 0, 0, 0.8) !important;
   }
 }
 
-/* Framer Motion optimizations */
-.motion-reduce {
-  animation: none !important;
-  transition: none !important;
-}
-
-/* Enhanced gradient animations */
-@keyframes gradient-shift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient-shift 3s ease infinite;
-}
-
-/* Enhanced text effects */
+/* Enhanced Text Effects */
 .text-glow {
-  text-shadow: 0 0 20px rgba(255, 107, 43, 0.5);
+  text-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
 }
 
 .text-glow:hover {
-  text-shadow: 0 0 30px rgba(255, 107, 43, 0.8);
+  text-shadow: 0 0 30px rgba(249, 115, 22, 0.8);
 }
 
-/* Improved focus indicators for better accessibility */
-.focus-visible:focus {
-  outline: 2px solid #FF6B2B;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(255, 107, 43, 0.2);
-}
-
-/* Better contrast for light mode */
+/* Better Contrast for Accessibility */
 .light .text-gray-600 {
   color: #4b5563;
 }
@@ -371,7 +440,6 @@ button:not(:disabled):active {
   color: #111827;
 }
 
-/* Ensure proper contrast in dark mode */
 .dark .text-gray-300 {
   color: #d1d5db;
 }
@@ -382,4 +450,52 @@ button:not(:disabled):active {
 
 .dark .text-white {
   color: #ffffff;
+}
+
+/* Enhanced Focus Management */
+.focus-visible:focus {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.2);
+}
+
+/* Skip Link for Accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #f97316;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Enhanced Error States */
+.error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+.error-text {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Success States */
+.success {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
+}
+
+.success-text {
+  color: #10b981;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
