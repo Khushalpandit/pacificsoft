@@ -26,8 +26,6 @@ export default {
         'float-delayed': 'float-delayed 8s ease-in-out infinite 2s',
         'gradient-x': 'gradient-x 3s ease infinite',
         'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
-        'shine': 'shine 5s linear infinite',
-        'gradient': 'gradient 8s linear infinite',
       },
       backdropBlur: {
         xs: '2px',
@@ -35,17 +33,6 @@ export default {
       boxShadow: {
         'glow': '0 0 20px rgba(255, 107, 43, 0.3)',
         'glow-lg': '0 0 40px rgba(255, 107, 43, 0.4)',
-      },
-      keyframes: {
-        shine: {
-          '0%': { 'background-position': '100%' },
-          '100%': { 'background-position': '-100%' },
-        },
-        gradient: {
-          '0%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-          '100%': { backgroundPosition: '0% 50%' },
-        },
       },
     },
   },

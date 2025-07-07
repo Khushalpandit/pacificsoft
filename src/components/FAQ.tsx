@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronDown, Search, Sparkles } from 'lucide-react';
-import BlurText from './animations/BlurText';
-import GradientText from './animations/GradientText';
 
 interface FAQItem {
   id: number;
@@ -120,14 +118,9 @@ const FAQ: React.FC = () => {
             <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
             FAQ
           </div>
-          <div className="mb-6">
-            <BlurText
-              text="Frequently Asked Questions"
-              className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight"
-              delay={100}
-              animateBy="words"
-            />
-          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+            Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B2B] via-[#FF8A4A] to-[#FFB366] animate-gradient-x">Questions</span>
+          </h2>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Find answers to common questions about our services, process, and pricing.
           </p>

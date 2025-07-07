@@ -19,6 +19,7 @@ const StatsSection: React.FC = () => {
 
   return (
     <section className="relative py-16 bg-gradient-to-r from-[#FF6B2B] to-[#FF8A4A] overflow-hidden">
+      <div className="absolute inset-0 bg-black/10"></div>
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           {stats.map((stat, index) => (

@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Calendar, Sparkles, Star, TrendingUp, Users, Award, Zap } from 'lucide-react';
-import ShinyText from './animations/ShinyText';
-import GradientText from './animations/GradientText';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -89,30 +87,19 @@ const Hero: React.FC = () => {
             <div className="w-2 h-2 bg-[#FF6B2B] rounded-full ml-2 animate-ping"></div>
           </motion.div>
           
-          {/* Main Headline with ShinyText */}
-          <motion.div 
+          {/* Main Headline */}
+          <motion.h1 
             className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="mb-2">
-              <ShinyText 
-                text="We Don't Just Build Websites"
-                speed={6}
-                className="text-gray-900 dark:text-white"
-              />
-            </div>
-            <div>
-              <GradientText 
-                colors={["#FF6B2B", "#FF8A4A", "#FFB366"]}
-                animationSpeed={6}
-                className="text-4xl md:text-6xl lg:text-7xl font-bold"
-              >
-                We Build Market Leaders.
-              </GradientText>
-            </div>
-          </motion.div>
+            We Don't Just Build Websites
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B2B] via-[#FF8A4A] to-[#FFB366] animate-gradient-x">
+              We Build Market Leaders.
+            </span>
+          </motion.h1>
           
           {/* Subheadline */}
           <motion.p 

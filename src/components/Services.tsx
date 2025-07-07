@@ -11,9 +11,6 @@ import {
   Calendar,
   CheckCircle
 } from 'lucide-react';
-import BlurText from './animations/BlurText';
-import GradientText from './animations/GradientText';
-import GlareHover from './animations/GlareHover';
 
 interface Service {
   icon: React.ReactNode;
@@ -136,12 +133,9 @@ const Services: React.FC = () => {
         {/* All Your Website Needs Section - Moved to top */}
         <div className="text-center mb-20">
           <div className="max-w-4xl mx-auto p-8 md:p-12 bg-gradient-to-br from-[#FF6B2B]/10 to-purple-500/10 dark:from-[#FF6B2B]/20 dark:to-purple-500/20 backdrop-blur-sm border border-[#FF6B2B]/30 rounded-3xl">
-            <BlurText
-              text="All Your Website Needs, Expertly Handled"
-              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
-              delay={100}
-              animateBy="words"
-            />
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              All Your Website Needs, <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B2B] to-[#FF8A4A]">Expertly Handled</span>
+            </h3>
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
               End-to-end website solutions that ensure your website looks great, functions flawlessly, and drives results.
             </p>
@@ -180,15 +174,9 @@ const Services: React.FC = () => {
             <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
             Our Services
           </div>
-          <div className="mb-6">
-            <GradientText
-              colors={["#FF6B2B", "#FF8A4A", "#FFB366"]}
-              animationSpeed={6}
-              className="text-3xl md:text-5xl font-bold"
-            >
-              Comprehensive Digital Solutions
-            </GradientText>
-          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+            Comprehensive <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B2B] via-[#FF8A4A] to-[#FFB366] animate-gradient-x">Digital Solutions</span>
+          </h2>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
             From concept to deployment, we provide end-to-end digital solutions 
             that drive growth and success for your business.
@@ -198,58 +186,52 @@ const Services: React.FC = () => {
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <GlareHover
+            <div
               key={index}
-              glareColor="#FF6B2B"
-              glareOpacity={0.3}
-              className="service-card group p-8 rounded-2xl backdrop-blur-sm border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-500 hover:scale-105 overflow-hidden bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 shadow-lg hover:shadow-xl"
+              ref={(el) => {
+                if (el) cardsRef.current[index] = el;
+              }}
+              className="service-card group relative p-8 rounded-2xl backdrop-blur-sm border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-500 hover:scale-105 overflow-hidden bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 shadow-lg hover:shadow-xl"
             >
-              <div
-                ref={(el) => {
-                  if (el) cardsRef.current[index] = el;
-                }}
-                className="relative z-10"
-              >
-                {/* Animated background gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-                
-                {/* Glow effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#FF6B2B]/20 via-purple-500/20 to-blue-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+              {/* Animated background gradient */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+              
+              {/* Glow effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#FF6B2B]/20 via-purple-500/20 to-blue-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
 
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <div className={`flex items-center justify-center w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg group-hover:shadow-xl`}>
-                    <div className="text-white">
-                      {service.icon}
-                    </div>
+              <div className="relative z-10">
+                {/* Icon */}
+                <div className={`flex items-center justify-center w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg group-hover:shadow-xl`}>
+                  <div className="text-white">
+                    {service.icon}
                   </div>
-
-                  {/* Content */}
-                  <h3 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#FF6B2B] group-hover:to-[#FF8A4A] transition-all duration-300">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
-
-                  {/* Features */}
-                  <ul className="space-y-2 mb-6">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-sm text-gray-500 dark:text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-300">
-                        <CheckCircle className="w-4 h-4 text-[#FF6B2B] mr-3 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Learn More Link */}
-                  <button className={`group/btn flex items-center text-[#FF6B2B] font-medium hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#FF6B2B] hover:to-[#FF8A4A] transition-all duration-300`}>
-                    Learn More
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                  </button>
                 </div>
+
+                {/* Content */}
+                <h3 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#FF6B2B] group-hover:to-[#FF8A4A] transition-all duration-300">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                  {service.description}
+                </p>
+
+                {/* Features */}
+                <ul className="space-y-2 mb-6">
+                  {service.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-center text-sm text-gray-500 dark:text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-300">
+                      <CheckCircle className="w-4 h-4 text-[#FF6B2B] mr-3 flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Learn More Link */}
+                <button className={`group/btn flex items-center text-[#FF6B2B] font-medium hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#FF6B2B] hover:to-[#FF8A4A] transition-all duration-300`}>
+                  Learn More
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                </button>
               </div>
-            </GlareHover>
+            </div>
           ))}
         </div>
       </div>
