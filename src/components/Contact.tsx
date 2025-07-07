@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle, Calendar, Sparkles } from 'lucide-react';
+import BlurText from './animations/BlurText';
+import GradientText from './animations/GradientText';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -105,9 +107,14 @@ const Contact: React.FC = () => {
             <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
             Get In Touch
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-            Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B2B] via-[#FF8A4A] to-[#FFB366] animate-gradient-x">Start Your Project?</span>
-          </h2>
+          <div className="mb-6">
+            <BlurText
+              text="Ready to Start Your Project?"
+              className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight"
+              delay={100}
+              animateBy="words"
+            />
+          </div>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Let's discuss how Pacific Softwares can help transform your digital presence. 
             Schedule a consultation or send us a message.

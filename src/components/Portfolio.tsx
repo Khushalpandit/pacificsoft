@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ExternalLink, Github, Filter, Sparkles } from 'lucide-react';
+import BlurText from './animations/BlurText';
+import GradientText from './animations/GradientText';
+import GlareHover from './animations/GlareHover';
 
 interface Project {
   id: number;
@@ -143,9 +146,12 @@ const Portfolio: React.FC = () => {
             <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
             Our Portfolio
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-            Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B2B] via-[#FF8A4A] to-[#FFB366] animate-gradient-x">Projects</span>
-          </h2>
+          <BlurText
+            text="Featured Projects"
+            className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight"
+            delay={100}
+            animateBy="words"
+          />
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Explore our latest work and see how we've helped businesses transform their digital presence.
           </p>
@@ -171,72 +177,77 @@ const Portfolio: React.FC = () => {
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
-            <div
+            <GlareHover
               key={project.id}
-              ref={(el) => {
-                if (el) cardsRef.current[index] = el;
-              }}
-              className="service-card group relative rounded-2xl overflow-hidden backdrop-blur-sm border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-500 hover:scale-105 bg-white dark:bg-white/5 hover:shadow-xl"
+              glareColor="#FF6B2B"
+              glareOpacity={0.3}
+              className="service-card group rounded-2xl overflow-hidden backdrop-blur-sm border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-500 hover:scale-105 bg-white dark:bg-white/5 hover:shadow-xl"
             >
-              {/* Project Image */}
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                
-                {/* Overlay Links */}
-                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors duration-300"
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                    </a>
-                  )}
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors duration-300"
-                    >
-                      <Github className="w-5 h-5" />
-                    </a>
-                  )}
+              <div
+                ref={(el) => {
+                  if (el) cardsRef.current[index] = el;
+                }}
+              >
+                {/* Project Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  
+                  {/* Overlay Links */}
+                  <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors duration-300"
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </a>
+                    )}
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors duration-300"
+                      >
+                        <Github className="w-5 h-5" />
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              {/* Project Info */}
-              <div className="p-6">
-                <div className="mb-2">
-                  <span className="inline-block px-3 py-1 bg-[#FF6B2B]/20 text-[#FF6B2B] text-xs font-medium rounded-full">
-                    {project.category}
-                  </span>
-                </div>
-                
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#FF6B2B] group-hover:to-[#FF8A4A] transition-all duration-300">
-                  {project.title}
-                </h3>
-                
-                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-
-                {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2">
-                  {project.techStack.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-2 py-1 bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300 text-xs rounded border border-gray-200 dark:border-white/20"
-                    >
-                      {tech}
+                {/* Project Info */}
+                <div className="p-6">
+                  <div className="mb-2">
+                    <span className="inline-block px-3 py-1 bg-[#FF6B2B]/20 text-[#FF6B2B] text-xs font-medium rounded-full">
+                      {project.category}
                     </span>
-                  ))}
+                  </div>
+                  
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#FF6B2B] group-hover:to-[#FF8A4A] transition-all duration-300">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  {/* Tech Stack */}
+                  <div className="flex flex-wrap gap-2">
+                    {project.techStack.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="px-2 py-1 bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300 text-xs rounded border border-gray-200 dark:border-white/20"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            </GlareHover>
           ))}
         </div>
 

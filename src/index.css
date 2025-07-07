@@ -153,6 +153,18 @@ textarea:focus {
   }
 }
 
+/* New animation keyframes */
+@keyframes shine {
+  0% { background-position: 100%; }
+  100% { background-position: -100%; }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 /* Scrolling Logo Animation */
 @keyframes scroll {
   0% { transform: translateX(0); }
@@ -174,6 +186,14 @@ textarea:focus {
 .animate-gradient-x {
   background-size: 200% 200%;
   animation: gradient-x 3s ease infinite;
+}
+
+.animate-shine {
+  animation: shine 5s linear infinite;
+}
+
+.animate-gradient {
+  animation: gradient 8s linear infinite;
 }
 
 .animate-fade-in-up {

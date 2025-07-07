@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Star, Quote, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import BlurText from './animations/BlurText';
+import GradientText from './animations/GradientText';
 
 interface Testimonial {
   id: number;
@@ -113,9 +115,14 @@ const Testimonials: React.FC = () => {
             <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
             Client Testimonials
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-            What Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B2B] via-[#FF8A4A] to-[#FFB366] animate-gradient-x">Clients Say</span>
-          </h2>
+          <div className="mb-6">
+            <BlurText
+              text="What Our Clients Say"
+              className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight"
+              delay={100}
+              animateBy="words"
+            />
+          </div>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Don't just take our word for it. Here's what our clients say about 
             their experience working with Pacific Softwares.
