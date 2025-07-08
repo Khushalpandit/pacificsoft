@@ -30,8 +30,8 @@ interface ProcessStep {
 const Process: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeStep, setActiveStep] = useState(0);
-  const [isManuallyControlled, setIsManuallyControlled] = useState(false);
-  const [lastManualClick, setLastManualClick] = useState<number>(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -49,36 +49,33 @@ const Process: React.FC = () => {
       observer.observe(sectionRef.current);
     }
 
-    // Auto-progress through steps only if not manually controlled recently
-    const interval = setInterval(() => {
-      const now = Date.now();
-      // If user hasn't manually clicked in the last 10 seconds, resume auto-progression
-      if (!isManuallyControlled || (now - lastManualClick > 10000)) {
+    // Auto-progress through steps with slower timing
+    if (isAutoPlaying) {
+      const interval = setInterval(() => {
         setActiveStep((prev) => (prev + 1) % processSteps.length);
-        setIsManuallyControlled(false);
-      }
-    }, 5000);
+      }, 8000); // Increased from 5000ms to 8000ms for slower progression
+      
+      setIntervalId(interval);
+    }
 
     return () => {
       observer.disconnect();
-      clearInterval(interval);
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
     };
-  }, []);
+  }, [isAutoPlaying]);
 
   // Handle manual step selection
   const handleStepClick = (index: number) => {
     setActiveStep(index);
-    setIsManuallyControlled(true);
-    setLastManualClick(Date.now());
+    setIsAutoPlaying(false); // Stop auto-progression permanently when user clicks
     
-    // Auto-progress to next step after 8 seconds if user doesn't interact
-    setTimeout(() => {
-      const now = Date.now();
-      // Only auto-progress if user hasn't clicked again in the last 8 seconds
-      if (now - lastManualClick >= 7900) {
-        setActiveStep((prev) => (prev + 1) % processSteps.length);
-      }
-    }, 8000);
+    // Clear any existing interval
+    if (intervalId) {
+      clearInterval(intervalId);
+      setIntervalId(null);
+    }
   };
 
   const processSteps: ProcessStep[] = [
