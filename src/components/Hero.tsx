@@ -170,7 +170,7 @@ const Hero: React.FC = () => {
 
           {/* Rotating Services Display with margin bottom */}
           <motion.div 
-            className="text-center mb-24"
+            className="text-center mb-32"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 1.2 }}

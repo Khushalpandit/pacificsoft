@@ -242,6 +242,30 @@ const Portfolio: React.FC = () => {
 
         {/* Bottom CTA */}
         <div className="text-center mt-16 md:mt-20">
+          {/* Stats Integration */}
+          <div className="mb-12 p-8 bg-gradient-to-r from-orange-500/10 to-purple-500/10 dark:from-orange-500/20 dark:to-purple-500/20 backdrop-blur-sm border border-orange-500/30 rounded-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mb-8">
+              <div className="group">
+                <div className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                  150+
+                </div>
+                <div className="text-gray-600 dark:text-gray-300 text-lg">Happy Clients</div>
+              </div>
+              <div className="group">
+                <div className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                  98%
+                </div>
+                <div className="text-gray-600 dark:text-gray-300 text-lg">Success Rate</div>
+              </div>
+              <div className="group">
+                <div className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                  200+
+                </div>
+                <div className="text-gray-600 dark:text-gray-300 text-lg">Projects Delivered</div>
+              </div>
+            </div>
+          </div>
+          
           <p className="text-gray-600 dark:text-gray-300 mb-6">Ready to start your project?</p>
           <a
             href="https://cal.com/khushal-sharma-txi5n5"
