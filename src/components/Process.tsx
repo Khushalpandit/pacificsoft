@@ -30,6 +30,8 @@ interface ProcessStep {
 const Process: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeStep, setActiveStep] = useState(0);
+  const [isManuallyControlled, setIsManuallyControlled] = useState(false);
+  const [lastManualClick, setLastManualClick] = useState<number>(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -47,16 +49,37 @@ const Process: React.FC = () => {
       observer.observe(sectionRef.current);
     }
 
-    // Auto-progress through steps
+    // Auto-progress through steps only if not manually controlled recently
     const interval = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % processSteps.length);
-    }, 6000);
+      const now = Date.now();
+      // If user hasn't manually clicked in the last 10 seconds, resume auto-progression
+      if (!isManuallyControlled || (now - lastManualClick > 10000)) {
+        setActiveStep((prev) => (prev + 1) % processSteps.length);
+        setIsManuallyControlled(false);
+      }
+    }, 5000);
 
     return () => {
       observer.disconnect();
       clearInterval(interval);
     };
   }, []);
+
+  // Handle manual step selection
+  const handleStepClick = (index: number) => {
+    setActiveStep(index);
+    setIsManuallyControlled(true);
+    setLastManualClick(Date.now());
+    
+    // Auto-progress to next step after 8 seconds if user doesn't interact
+    setTimeout(() => {
+      const now = Date.now();
+      // Only auto-progress if user hasn't clicked again in the last 8 seconds
+      if (now - lastManualClick >= 7900) {
+        setActiveStep((prev) => (prev + 1) % processSteps.length);
+      }
+    }, 8000);
+  };
 
   const processSteps: ProcessStep[] = [
     {
@@ -303,7 +326,7 @@ const Process: React.FC = () => {
             {processSteps.map((step, index) => (
               <motion.button
                 key={step.id}
-                onClick={() => setActiveStep(index)}
+                onClick={() => handleStepClick(index)}
                 className={`px-4 md:px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                   activeStep === index
                     ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/25 scale-105'
@@ -442,7 +465,7 @@ const Process: React.FC = () => {
               <motion.div
                 key={step.id}
                 className="flex flex-col items-center max-w-xs cursor-pointer group"
-                onClick={() => setActiveStep(index)}
+                onClick={() => handleStepClick(index)}
                 whileHover={{ scale: 1.05 }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -490,7 +513,7 @@ const Process: React.FC = () => {
             <motion.div
               key={step.id}
               className="flex items-start space-x-6 cursor-pointer group"
-              onClick={() => setActiveStep(index)}
+              onClick={() => handleStepClick(index)}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
