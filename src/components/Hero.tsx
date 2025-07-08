@@ -89,12 +89,12 @@ const Hero: React.FC = () => {
           
           {/* Main Headline */}
           <motion.h1 
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight px-4 sm:px-0"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            We Don't Just Build Websites
+            <span className="block">We Don't Just Build Websites</span>
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 animate-gradient-x">
               We Build Market Leaders.
@@ -103,7 +103,7 @@ const Hero: React.FC = () => {
           
           {/* Subheadline */}
           <motion.p 
-            className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8"
+            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8 px-4 sm:px-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -117,18 +117,18 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="mb-16"
+            className="mb-16 px-4 sm:px-0"
           >
             <a
               href="https://cal.com/khushal-sharma-txi5n5"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105 relative overflow-hidden"
+              className="group inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105 relative overflow-hidden text-sm sm:text-base"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <Calendar className="mr-2 w-5 h-5 relative z-10" />
+              <Calendar className="mr-2 w-4 h-4 sm:w-5 sm:h-5 relative z-10" />
               <span className="relative z-10">Book a 15 min call</span>
-              <ArrowRight className="ml-2 w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
+              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
             </a>
           </motion.div>
 
@@ -139,7 +139,7 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mb-16"
           >
-            <p className="text-gray-500 dark:text-gray-400 mb-8 text-sm">Trusted by industry leaders worldwide</p>
+            <p className="text-gray-500 dark:text-gray-400 mb-8 text-xs sm:text-sm px-4 sm:px-0">Trusted by industry leaders worldwide</p>
             
             {/* Scrolling Logos Animation */}
             <div className="relative overflow-hidden">
@@ -148,20 +148,20 @@ const Hero: React.FC = () => {
                 {clientLogos.map((client, index) => (
                   <motion.div 
                     key={`first-${index}`}
-                    className="flex-shrink-0 w-24 h-16 bg-white/50 dark:bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm border border-gray-200 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/20 transition-all duration-300"
+                    className="flex-shrink-0 w-20 h-12 sm:w-24 sm:h-16 bg-white/50 dark:bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm border border-gray-200 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/20 transition-all duration-300"
                     whileHover={{ scale: 1.05 }}
                   >
-                    <span className="text-gray-700 dark:text-white font-bold text-lg">{client.logo}</span>
+                    <span className="text-gray-700 dark:text-white font-bold text-sm sm:text-lg">{client.logo}</span>
                   </motion.div>
                 ))}
                 {/* Duplicate set for seamless loop */}
                 {clientLogos.map((client, index) => (
                   <motion.div 
                     key={`second-${index}`}
-                    className="flex-shrink-0 w-24 h-16 bg-white/50 dark:bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm border border-gray-200 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/20 transition-all duration-300"
+                    className="flex-shrink-0 w-20 h-12 sm:w-24 sm:h-16 bg-white/50 dark:bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm border border-gray-200 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/20 transition-all duration-300"
                     whileHover={{ scale: 1.05 }}
                   >
-                    <span className="text-gray-700 dark:text-white font-bold text-lg">{client.logo}</span>
+                    <span className="text-gray-700 dark:text-white font-bold text-sm sm:text-lg">{client.logo}</span>
                   </motion.div>
                 ))}
               </div>
@@ -170,20 +170,20 @@ const Hero: React.FC = () => {
 
           {/* Rotating Services Display with margin bottom */}
           <motion.div 
-            className="text-center mb-32"
+            className="text-center mb-24 sm:mb-32 px-4 sm:px-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 1.2 }}
           >
-            <div className="inline-flex items-center space-x-3 px-6 py-3 bg-white/50 dark:bg-white/10 backdrop-blur-sm rounded-full border border-gray-200 dark:border-white/10">
-              <span className="text-gray-600 dark:text-gray-400 text-sm">Specializing in:</span>
-              <div className="text-lg font-semibold text-orange-500 h-6 overflow-hidden">
+            <div className="inline-flex items-center space-x-2 sm:space-x-3 px-4 sm:px-6 py-2 sm:py-3 bg-white/50 dark:bg-white/10 backdrop-blur-sm rounded-full border border-gray-200 dark:border-white/10">
+              <span className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm">Specializing in:</span>
+              <div className="text-sm sm:text-lg font-semibold text-orange-500 h-5 sm:h-6 overflow-hidden">
                 <motion.div 
                   className="transition-transform duration-500 ease-in-out"
-                  style={{ transform: `translateY(-${currentServiceIndex * 24}px)` }}
+                  style={{ transform: `translateY(-${currentServiceIndex * (window.innerWidth < 640 ? 20 : 24)}px)` }}
                 >
                   {services.map((service, index) => (
-                    <div key={index} className="h-6 flex items-center">
+                    <div key={index} className="h-5 sm:h-6 flex items-center">
                       {service}
                     </div>
                   ))}
@@ -195,15 +195,15 @@ const Hero: React.FC = () => {
 
         {/* Scroll Indicator */}
         <motion.div 
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.4 }}
         >
-          <div className="w-6 h-10 border-2 border-gray-400 dark:border-white/30 rounded-full flex justify-center relative animate-bounce">
-            <div className="w-1 h-3 bg-gradient-to-b from-orange-500 to-transparent rounded-full mt-2 animate-pulse"></div>
+          <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-gray-400 dark:border-white/30 rounded-full flex justify-center relative animate-bounce">
+            <div className="w-1 h-2 sm:h-3 bg-gradient-to-b from-orange-500 to-transparent rounded-full mt-1 sm:mt-2 animate-pulse"></div>
           </div>
-          <div className="text-gray-500 dark:text-white/50 text-xs mt-2 text-center">Scroll</div>
+          <div className="text-gray-500 dark:text-white/50 text-xs mt-1 sm:mt-2 text-center">Scroll</div>
         </motion.div>
       </div>
     </section>
