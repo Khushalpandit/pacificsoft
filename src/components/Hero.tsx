@@ -89,13 +89,15 @@ const Hero: React.FC = () => {
           
           {/* Main Headline */}
           <motion.h1 
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight px-2 sm:px-4 md:px-0"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight px-4 sm:px-0"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="block text-center sm:text-left">We Don't Just Build</span>
-            <span className="block text-center sm:text-left">Websites</span>
+            <span className="block text-center sm:text-left">
+              <span className="block sm:inline">We Don't Just Build</span>
+              <span className="block sm:inline sm:ml-2">Websites</span>
+            </span>
             <br />
             <span className="block text-center sm:text-left text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 animate-gradient-x">
               We Build Market Leaders.
@@ -104,13 +106,13 @@ const Hero: React.FC = () => {
           
           {/* Subheadline */}
           <motion.p 
-            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8 px-4 sm:px-0"
+            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8 px-4 sm:px-0 text-center sm:text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Your website is your first impression. We make sure it's unforgettable, 
-            high-converting, and built to dominate.
+            <span className="block sm:inline">Your website is your first impression.</span>
+            <span className="block sm:inline sm:ml-1">We make sure it's unforgettable, high-converting, and built to dominate.</span>
           </motion.p>
 
           {/* CTA Button */}
