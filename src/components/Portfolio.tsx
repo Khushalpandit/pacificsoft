@@ -243,7 +243,7 @@ const Portfolio: React.FC = () => {
         {/* Bottom CTA */}
         <div className="text-center mt-16 md:mt-20">
           {/* Stats Integration */}
-          <div className="mb-12 p-8 bg-gradient-to-r from-orange-500/10 to-purple-500/10 dark:from-orange-500/20 dark:to-purple-500/20 backdrop-blur-sm border border-orange-500/30 rounded-2xl">
+          <div className="mb-12 p-8 bg-gradient-to-r from-orange-500/10 to-purple-500/10 dark:from-orange-500/20 dark:to-purple-500/20 backdrop-blur-sm border border-orange-500/30 rounded-2xl max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mb-8">
               <div className="group">
                 <div className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2 group-hover:scale-110 transition-transform duration-300">
