@@ -94,25 +94,22 @@ const Hero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="block text-center sm:text-left">
-              <span className="block sm:inline">We Don't Just Build</span>
-              <span className="block sm:inline sm:ml-2">Websites</span>
-            </span>
+            <span className="block">We Don't Just Build Websites</span>
             <br />
-            <span className="block text-center sm:text-left text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 animate-gradient-x">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 animate-gradient-x">
               We Build Market Leaders.
             </span>
           </motion.h1>
           
           {/* Subheadline */}
           <motion.p 
-            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8 px-4 sm:px-0 text-center sm:text-center"
+            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8 px-4 sm:px-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <span className="block sm:inline">Your website is your first impression.</span>
-            <span className="block sm:inline sm:ml-1">We make sure it's unforgettable, high-converting, and built to dominate.</span>
+            Your website is your first impression. We make sure it's unforgettable, 
+            high-converting, and built to dominate.
           </motion.p>
 
           {/* CTA Button */}
